@@ -2,6 +2,7 @@ package com.zpi.tripgroupservice.invitation;
 
 import com.zpi.tripgroupservice.aspects.AuthorizeCoordinator;
 import com.zpi.tripgroupservice.commons.Role;
+import com.zpi.tripgroupservice.event.sender.UserJoinedGroupSender;
 import com.zpi.tripgroupservice.exception.ExceptionInfo;
 import com.zpi.tripgroupservice.trip_group.TripGroup;
 import com.zpi.tripgroupservice.trip_group.TripGroupService;
@@ -25,6 +26,7 @@ public class InvitationService {
     private final InvitationRepository invitationRepository;
     private final UserGroupService userGroupService;
     private final TripGroupService tripGroupService;
+    private final UserJoinedGroupSender userJoinedGroupSender;
     @Value("${app.salt-length}")
     private int saltLength;
 
@@ -84,6 +86,8 @@ public class InvitationService {
         if(userGroupService.exists(key))
             throw new IllegalArgumentException(ExceptionInfo.USER_ALREADY_MEMBER);
 
-        return userGroupService.createUserGroup(key, Role.PARTICIPANT);
+        var userGroup = userGroupService.createUserGroup(key, Role.PARTICIPANT);
+        userJoinedGroupSender.sendMessage(userId, groupID);
+        return userGroup;
     }
 }

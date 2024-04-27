@@ -1,6 +1,6 @@
-package com.zpi.tripgroupservice.event.listener;
+package com.zpi.notification.event.listener;
 
-import com.zpi.tripgroupservice.event.model.UserRegisteredEvent;
+import com.zpi.notification.event.model.UserRegisteredEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;

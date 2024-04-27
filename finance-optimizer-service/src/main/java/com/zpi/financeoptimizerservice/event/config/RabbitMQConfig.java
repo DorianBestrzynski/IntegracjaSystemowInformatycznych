@@ -1,4 +1,4 @@
-package com.zpi.tripgroupservice.event.config;
+package com.zpi.financeoptimizerservice.event.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -11,8 +11,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
     @Bean
-    public Queue createUserJoinedGroupQueue() {
-        return new Queue("q.user-joined-group");
+    public Queue createNewExpendiutreQueue() {
+        return new Queue("q.new-expenditure");
+    }
+
+    @Bean
+    public Queue createResolvedExpendiutreQueue() {
+        return new Queue("q.resolved-expenditure");
     }
 
     @Bean
