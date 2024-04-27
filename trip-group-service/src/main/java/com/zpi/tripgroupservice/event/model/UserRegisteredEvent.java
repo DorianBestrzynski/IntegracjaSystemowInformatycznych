@@ -1,29 +1,20 @@
 package com.zpi.tripgroupservice.event.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.context.ApplicationEvent;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.time.LocalDate;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
-public class UserRegisteredEvent extends ApplicationEvent {
+public class UserRegisteredEvent {
     private String eventName;
     private String email;
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private LocalDate birhday;
     private Instant eventTimestamp;
-
-    public UserRegisteredEvent(Object source, String eventName, String email, String firstName, String lastName, String phoneNumber, LocalDate birhday, Instant eventTimestamp) {
-        super(source);
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.birhday = birhday;
-        this.eventName = eventName;
-        this.eventTimestamp = eventTimestamp;
-    }
 }

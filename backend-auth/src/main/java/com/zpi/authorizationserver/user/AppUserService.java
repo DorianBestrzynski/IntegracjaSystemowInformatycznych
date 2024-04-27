@@ -6,6 +6,7 @@ import com.zpi.authorizationserver.event.Constants;
 import com.zpi.authorizationserver.event.UserRegisteredEvent;
 import com.zpi.authorizationserver.exceptions.ApiPermissionException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +20,7 @@ import static com.zpi.authorizationserver.event.Constants.USER_REGISTERED_EVENT;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AppUserService {
     private final AppUserRepository appUserRepository;
     private final PasswordEncoder passwordEncoder;
@@ -58,9 +60,10 @@ public class AppUserService {
         password.setAppUser(user);
         appUserRepository.save(user);
 
-        var userRegisteredEvent = new UserRegisteredEvent(this, USER_REGISTERED_EVENT, registerRequestDto.email(),
+        var userRegisteredEvent = new UserRegisteredEvent(USER_REGISTERED_EVENT, registerRequestDto.email(),
                 registerRequestDto.firstName(), registerRequestDto.surname(), registerRequestDto.phoneNumber(),
-                registerRequestDto.birthday(), Instant.now());
-        rabbitTemplate.convertAndSend("", "user-registration", userRegisteredEvent);
+                Instant.now());
+        rabbitTemplate.convertAndSend("q.user-registration" ,userRegisteredEvent);
+        log.error("Here");
     }
 }
