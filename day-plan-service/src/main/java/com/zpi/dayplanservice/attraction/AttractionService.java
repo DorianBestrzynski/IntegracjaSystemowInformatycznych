@@ -13,6 +13,7 @@ import com.zpi.dayplanservice.exception.ApiRequestException;
 import com.zpi.dayplanservice.mapstruct.MapStructMapper;
 import com.zpi.dayplanservice.proxies.TripGroupProxy;
 import com.zpi.dayplanservice.security.CustomUsernamePasswordAuthenticationToken;
+import com.zpi.dayplanservice.weather.WeatherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,11 +40,26 @@ public class AttractionService {
 
     private final TripGroupProxy tripGroupProxy;
 
+    private final WeatherService weatherService;
+
     private static final int RADIUS_DISTANCE = 50000;
 
     @AuthorizePartOfTheGroup
-    public List<Attraction> getAllAttractionsForDay(Long groupId, Long dayPlanId) {
-        return dayPlanService.getDayPlanById(dayPlanId).getDayAttractions().stream().toList();
+    public List<AttractionFullInfoDto> getAllAttractionsForDay(Long groupId, Long dayPlanId) {
+        var dayPlan = dayPlanService.getDayPlanById(dayPlanId);
+        var date = dayPlan.getDate();
+        var attractions = dayPlan.getDayAttractions().stream().toList();
+        var weather = weatherService.getWeatherForAttraction(date, getAttractionsInfo(attractions));
+
+        return attractions.stream()
+                .map(attraction -> new AttractionFullInfoDto(attraction, weather.get(attraction.getAttractionId())))
+                .toList();
+    }
+
+    private List<AttractionInfo> getAttractionsInfo(List<Attraction> attractions) {
+        return attractions.stream()
+                .map(attraction -> new AttractionInfo(attraction.getAttractionId(), attraction.getLatitude(), attraction.getLongitude()))
+                .toList();
     }
 
     public List<AttractionCandidateDto> findCandidates(String name) {
