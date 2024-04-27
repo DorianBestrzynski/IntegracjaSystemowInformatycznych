@@ -1,4 +1,4 @@
-package com.zpi.userservice.mapper;
+package com.zpi.attractions_proxy.mapper;
 
 import org.mapstruct.*;
 

@@ -106,8 +106,19 @@ services:
       rabbitmq:
         condition: service_healthy
 
-  auth:
-    build: backend-auth
+  attractions:
+    build: attractions-proxy-service
+    mem_limit: 512m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  weather:
+    build: weather-proxy-service
     mem_limit: 512m
     environment:
       - SPRING_PROFILES_ACTIVE=docker

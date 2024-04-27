@@ -1,6 +1,5 @@
-package com.zpi.userservice.exceptions;
+package com.zpi.notification.exceptions;
 
-import com.zpi.userservice.exceptions.ApiException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

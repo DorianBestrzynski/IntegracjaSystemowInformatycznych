@@ -1,4 +1,4 @@
-package com.zpi.userservice.exceptions;
+package com.zpi.weather_proxy.exceptions;
 
 public class ExceptionInfo {
 

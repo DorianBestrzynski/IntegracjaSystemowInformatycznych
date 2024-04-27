@@ -1,4 +1,4 @@
-package com.zpi.userservice.exceptions;
+package com.zpi.attractions_proxy.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.http.HttpStatus;
