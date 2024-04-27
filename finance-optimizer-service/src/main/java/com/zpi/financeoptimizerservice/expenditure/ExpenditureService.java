@@ -3,6 +3,7 @@ package com.zpi.financeoptimizerservice.expenditure;
 import com.zpi.financeoptimizerservice.aspects.AuthorizeAuthorOrCoordinatorExpenditure;
 import com.zpi.financeoptimizerservice.aspects.AuthorizePartOfTheGroup;
 import com.zpi.financeoptimizerservice.dto.ExpenditureInputDto;
+import com.zpi.financeoptimizerservice.event.sender.NewExpenditureSender;
 import com.zpi.financeoptimizerservice.financial_request.FinancialRequestOptimizer;
 import com.zpi.financeoptimizerservice.financial_request.FinancialRequestService;
 import com.zpi.financeoptimizerservice.validation.ExpenditureValidator;
@@ -25,6 +26,7 @@ public class ExpenditureService {
     private final ExpenditureValidator expenditureValidator;
     private final FinancialRequestService financialRequestService;
     private final FinancialRequestOptimizer financialRequestOptimizer;
+    private final NewExpenditureSender newExpenditureSender;
 
 
     @AuthorizePartOfTheGroup
@@ -39,6 +41,7 @@ public class ExpenditureService {
         var addedExpenditure = expenditureRepository.save(expenditure);
         createFinancialRequestsFrom(expenditureInput, groupId);
         financialRequestOptimizer.optimizeFinancialRequestsIn(groupId);
+        newExpenditureSender.sendMessage(expenditure);
         return addedExpenditure;
     }
 

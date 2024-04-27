@@ -1,4 +1,4 @@
-package com.zpi.tripgroupservice.event.config;
+package com.zpi.authorizationserver.event.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
     @Bean
-    public Queue createUserJoinedGroupQueue() {
-        return new Queue("q.user-joined-group");
+    public Queue createUserRegistrationQueue() {
+        return new Queue("q.user-registration");
     }
 
     @Bean

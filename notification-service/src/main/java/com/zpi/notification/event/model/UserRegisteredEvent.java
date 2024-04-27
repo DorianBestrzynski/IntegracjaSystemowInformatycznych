@@ -1,11 +1,10 @@
-package com.zpi.tripgroupservice.event.model;
+package com.zpi.notification.event.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
-import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor

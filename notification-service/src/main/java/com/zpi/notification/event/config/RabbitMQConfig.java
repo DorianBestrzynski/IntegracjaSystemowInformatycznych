@@ -1,4 +1,4 @@
-package com.zpi.authorizationserver.event;
+package com.zpi.notification.event.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -13,6 +13,21 @@ public class RabbitMQConfig {
     @Bean
     public Queue createUserRegistrationQueue() {
         return new Queue("q.user-registration");
+    }
+
+    @Bean
+    public Queue createUserJoinedGroupQueue() {
+        return new Queue("q.user-joined-group");
+    }
+
+    @Bean
+    public Queue createNewExpendiutreQueue() {
+        return new Queue("q.new-expenditure");
+    }
+
+    @Bean
+    public Queue createResolvedExpendiutreQueue() {
+        return new Queue("q.resolved-expenditure");
     }
 
     @Bean
