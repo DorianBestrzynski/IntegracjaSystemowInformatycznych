@@ -1,8 +1,6 @@
 package com.zpi.financeoptimizerservice.event.sender;
 
-import com.zpi.financeoptimizerservice.event.model.NewExpenditureEvent;
 import com.zpi.financeoptimizerservice.event.model.ResolvedExpenditureEvent;
-import com.zpi.financeoptimizerservice.expenditure.Expenditure;
 import com.zpi.financeoptimizerservice.financial_request.FinancialRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
