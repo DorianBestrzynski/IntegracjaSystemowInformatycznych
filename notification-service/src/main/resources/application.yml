@@ -5,6 +5,11 @@ app.config-server: localhost
 app.database: localhost
 
 spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
   cloud:
     config:
       import-check:
