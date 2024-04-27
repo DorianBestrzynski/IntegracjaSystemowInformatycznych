@@ -5,6 +5,8 @@ app.config-server: localhost
 app.database: localhost
 app.trip-group-service: localhost
 app.attractions-proxy: localhost
+app.weather-proxy: localhost
+app.weather-proxy-service: localhost
 
 spring:
   cloud:

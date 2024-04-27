@@ -59,7 +59,7 @@ public class AttractionsService {
             var placeType = PlaceType.valueOf(category.toUpperCase());
             log.info("Performing search by location and category");
             log.info("Place type is: {}", placeType);
-            log.info("RankBy type is: " + rankBy);
+            log.info("RankBy type is: {}", rankBy);
             var request =  PlacesApi.nearbySearchQuery(context, coordinates);
             if (rankBy.equals(RankBy.PROMINENCE)) {
                 request.radius(RADIUS_DISTANCE);

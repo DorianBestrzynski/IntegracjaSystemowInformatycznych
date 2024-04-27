@@ -1,5 +1,6 @@
 package com.zpi.attractions_proxy.attractions;
 
+import com.google.maps.errors.ApiException;
 import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.LatLng;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController()
@@ -18,7 +20,7 @@ public class AttractionsController {
     private final AttractionsService attractionsService;
 
     @GetMapping("/find")
-    public ResponseEntity<List<AttractionCandidateDto>> getCandidates(@RequestParam(name = "name") String name) {
+    public ResponseEntity<List<AttractionCandidateDto>> getCandidates(@RequestParam(name = "name") String name) throws IOException, InterruptedException, ApiException {
         var attractionCandidates = attractionsService.findCandidates(name);
         return ResponseEntity.ok(attractionCandidates);
     }
