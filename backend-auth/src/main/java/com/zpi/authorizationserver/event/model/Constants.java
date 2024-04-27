@@ -1,4 +1,4 @@
-package com.zpi.authorizationserver.event;
+package com.zpi.authorizationserver.event.model;
 
 public final class Constants {
     private Constants(){}

@@ -15,6 +15,7 @@ public class UserJoinedGroupSender {
     public void sendMessage(Long userId, Long groupId) {
         var event = createEvent(userId, groupId);
         rabbitTemplate.convertAndSend("q.user-joined-group", event);
+        log.info("New expenditure event sent: {}", event);
     }
 
     private UserJoinedGroupEvent createEvent(Long userId, Long groupId) {
