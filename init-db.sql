@@ -1,0 +1,6 @@
+CREATE DATABASE auth;
+CREATE DATABASE day_plan;
+CREATE DATABASE finance;
+CREATE DATABASE trip_group;
+CREATE DATABASE users;
+CREATE DATABASE notification;

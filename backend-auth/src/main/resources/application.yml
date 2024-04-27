@@ -26,7 +26,7 @@ spring:
     uri: http://${app.config-server}:8888
   application.name: authentication-service
   datasource:
-    url: jdbc:postgresql://${app.database}:5432/test_db
+    url: jdbc:postgresql://${app.database}:5432/auth
     username: postgres
     password: postgres
   jpa:

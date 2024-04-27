@@ -16,7 +16,7 @@ spring:
       import-check:
         enabled: false
   datasource:
-    url: jdbc:postgresql://${app.database}:5432/test_db
+    url: jdbc:postgresql://${app.database}:5432/trip_group
     username: postgres
     password: postgres
   jpa:
