@@ -14,6 +14,11 @@ jwt:
   signing-secret: secret
 
 spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
   cloud.config:
     failFast: false
     import-check:
