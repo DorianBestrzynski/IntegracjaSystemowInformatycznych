@@ -1,4 +1,4 @@
-package com.zpi.tripgroupservice.google_api;
+package com.zpi.attractions_proxy.coordinates;
 
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
@@ -6,21 +6,21 @@ import com.google.maps.errors.ApiException;
 import com.google.maps.model.GeocodingResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import static com.zpi.tripgroupservice.commons.Utils.LATITUDE_INDEX;
-import static com.zpi.tripgroupservice.commons.Utils.LONGITUDE_INDEX;
-
 @RequiredArgsConstructor
-@Component
-public class Geolocation {
+@Service
+public class GeolocationService {
 
     @Qualifier("context")
     private final GeoApiContext context;
+
+    public final static int LATITUDE_INDEX = 0;
+    public final static int LONGITUDE_INDEX = 1;
 
 
     public GeoApiContext context() {
