@@ -17,9 +17,9 @@ public class WeatherService {
     private final WeatherClient weatherClient;
 
     public Map<Long, Weather> getWeatherForAttraction(LocalDate date, List<AttractionInfo> attractions) {
-            var weatherRequest = new WeatherRequest(date, attractions);
-            var response = weatherClient.getWeather(weatherRequest);
-            return response.stream()
-                    .collect(toMap(Weather::getAttractionId, Function.identity()));
+        var weatherRequest = new WeatherRequest(date, attractions);
+        var response = weatherClient.getWeather(weatherRequest);
+        return response.stream()
+                .collect(toMap(Weather::getAttractionId, Function.identity()));
     }
 }
