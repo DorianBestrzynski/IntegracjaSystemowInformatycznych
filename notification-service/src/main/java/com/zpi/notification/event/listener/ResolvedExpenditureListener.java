@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class ResolvedExpenditureListener {
 
     @RabbitListener(queues = {"q.resolved-expenditure"})
-    public void onUserRegistration(ResolvedExpenditureEvent event) {
+    public void onResolvedExpenditure(ResolvedExpenditureEvent event) {
         log.info("Resolved Expenditure Event Received: {}", event);
         System.out.println(event.getResolvedDate());
     }
