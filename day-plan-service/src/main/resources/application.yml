@@ -4,6 +4,7 @@ spring.application.name: day-plan
 app.config-server: localhost
 app.database: localhost
 app.trip-group-service: localhost
+app.attractions-proxy: localhost
 
 spring:
   cloud:
@@ -37,6 +38,7 @@ app.trip-group-service: trip-group
 app.weather-proxy-service: weather-proxy
 app.config-server: config-server
 app.database: postgres
+app.attractions-proxy: attractions-proxy
 
 ---
 spring.config.activate.on-profile: test

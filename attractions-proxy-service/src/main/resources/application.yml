@@ -18,6 +18,8 @@ spring:
       maxAttempts: 20
     uri: http://${app.config-server}:8888
 
+google_api_key:
+
 ---
 spring.config.activate.on-profile: docker
 spring.config.import: "configserver:"
