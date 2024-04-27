@@ -34,6 +34,7 @@ spring:
 spring.config.activate.on-profile: docker
 spring.config.import: "configserver:"
 app.trip-group-service: trip-group
+app.weather-proxy-service: weather-proxy
 app.config-server: config-server
 app.database: postgres
 
