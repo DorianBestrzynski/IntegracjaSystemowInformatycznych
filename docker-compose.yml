@@ -106,7 +106,7 @@ services:
       rabbitmq:
         condition: service_healthy
 
-  attractions:
+  attractions-proxy:
     build: attractions-proxy-service
     mem_limit: 512m
     environment:
@@ -117,7 +117,7 @@ services:
       rabbitmq:
         condition: service_healthy
 
-  weather:
+  weather-proxy:
     build: weather-proxy-service
     mem_limit: 512m
     environment:
