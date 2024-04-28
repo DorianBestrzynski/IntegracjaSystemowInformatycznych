@@ -1,5 +1,6 @@
 package com.zpi.dayplanservice.configuration;
 import com.zpi.dayplanservice.exception.CustomFeignErrorDecoder;
+import com.zpi.dayplanservice.exception.CustomFeignErrorDecoder;
 import feign.codec.ErrorDecoder;
 import org.springframework.cloud.openfeign.FeignClientProperties;
 import org.springframework.context.annotation.Bean;

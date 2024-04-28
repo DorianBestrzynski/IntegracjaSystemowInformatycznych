@@ -9,6 +9,7 @@ app.accommodation-service: localhost
 app.finance-service: localhost
 app.user-service: localhost
 app.availability-service: localhost
+app.attractions-proxy: localhost
 
 spring:
   rabbitmq:
@@ -51,7 +52,7 @@ app.accommodation-service: accommodation
 app.finance-service: finance-optimizer
 app.user-service: user
 app.availability-service: availability
-
+app.attractions-proxy: attractions-proxy
 
 ---
 spring.config.activate.on-profile: test

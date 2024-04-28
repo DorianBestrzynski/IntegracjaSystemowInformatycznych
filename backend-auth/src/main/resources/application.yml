@@ -31,7 +31,7 @@ spring:
     uri: http://${app.config-server}:8888
   application.name: authentication-service
   datasource:
-    url: jdbc:postgresql://${app.database}:5432/auth
+    url: jdbc:postgresql://${app.database}:5432/users
     username: postgres
     password: postgres
   jpa:

@@ -3,7 +3,9 @@ package com.zpi.financeoptimizerservice.financial_request;
 import com.zpi.financeoptimizerservice.aspects.AuthorizeAuthorOrCoordinatorRequest;
 import com.zpi.financeoptimizerservice.aspects.AuthorizePartOfTheGroup;
 import com.zpi.financeoptimizerservice.commons.Status;
+import com.zpi.financeoptimizerservice.event.sender.ResolveExpenditureSender;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -22,6 +24,7 @@ import static com.zpi.financeoptimizerservice.exceptions.ExceptionsInfo.INVALID_
 public class FinancialRequestService {
 
     private final FinancialRequestRepository financialRequestRepository;
+    private final ResolveExpenditureSender resolveExpenditureSender;
 
     @Transactional
     public void addFinancialRequests(Long debteeId, Map<Long, Double> debts, Long groupId) {
@@ -55,6 +58,7 @@ public class FinancialRequestService {
         financialRequest.setStatus(Status.RESOLVED);
         financialRequest.setGenerationDate(LocalDateTime.now());
         financialRequestRepository.save(financialRequest);
+        resolveExpenditureSender.sendMessage(financialRequest);
     }
 
     public void deleteAllFinancialRequests(Long groupId) {

@@ -1,6 +1,7 @@
 package com.zpi.dayplanservice.attraction;
 
 import com.zpi.dayplanservice.dto.AttractionCandidateDto;
+import com.zpi.dayplanservice.dto.AttractionFullInfoDto;
 import com.zpi.dayplanservice.dto.AttractionPlanDto;
 import com.zpi.dayplanservice.dto.RankByType;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class AttractionController {
     private final AttractionService attractionService;
 
     @GetMapping()
-    public ResponseEntity<List<Attraction>> getAllAttractionsForDay(@RequestParam Long groupId, @RequestParam Long dayPlanId){
+    public ResponseEntity<List<AttractionFullInfoDto>> getAllAttractionsForDay(@RequestParam Long groupId, @RequestParam Long dayPlanId){
         var result = attractionService.getAllAttractionsForDay(groupId, dayPlanId);
         return ResponseEntity.ok(result);
     }

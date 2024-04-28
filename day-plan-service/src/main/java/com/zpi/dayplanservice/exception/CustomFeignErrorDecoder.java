@@ -33,7 +33,7 @@ public class CustomFeignErrorDecoder implements ErrorDecoder {
             case 409 -> new IllegalDateException(message != null ? message : TAKEN_DATE);
             case 422 -> new UnprocessableEntityException(message != null ? message : UNPROCESSABLE_ENTITY_FEIGN);
             case 503 -> new ServiceNotFoundException(message != null ? message : SERVICE_UNAVAILABLE_FEIGN);
-            default -> new Exception(EXCEPTION_FEIGN);
+            default -> new Exception(message != null ? message : EXCEPTION_FEIGN);
         };
     }
 }
