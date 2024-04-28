@@ -1,6 +1,7 @@
 package com.zpi.dayplanservice.weather;
 
 import com.zpi.dayplanservice.attraction.AttractionInfo;
+import com.zpi.dayplanservice.proxies.WeatherClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
