@@ -1,13 +1,18 @@
 package com.zpi.weather_proxy.weather;
 
-import com.zpi.weather_proxy.CustomWeatherFeignConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "test", url = "https://api.openweathermap.org/data/2.5", configuration = CustomWeatherFeignConfiguration.class)
+import java.time.LocalDate;
+import java.util.List;
+
+@FeignClient(name = "open-meteo", url = "https://api.open-meteo.com/v1/")
 public interface WeatherProxyAPI {
 
-    @GetMapping("/forecast?units=metric")
-    WeatherResponseDto get5dayWeather(@RequestParam("lat") Double latitude, @RequestParam("lon") Double longitude);
+    @GetMapping("/forecast?daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max,rain_sum,wind_speed_10m_max&timezone=Europe%2FBerlin")
+    ResponseEntity<List<WeatherResponseDto>> getForecast(@RequestParam("latitude") List<Double> latitude, @RequestParam("longitude") List<Double> longitude,
+                                                         @RequestParam("start_date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, @RequestParam("end_date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate);
 }
