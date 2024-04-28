@@ -7,7 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CustomFeignConfiguration extends FeignClientProperties.FeignClientConfiguration {
+public class
+CustomFeignConfiguration extends FeignClientProperties.FeignClientConfiguration {
     @Bean
     public ErrorDecoder errorDecoder() {
         return new CustomFeignErrorDecoder();
