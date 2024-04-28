@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +20,9 @@ public class WeatherProxyService {
 
     public List<Weather> getWeather(WeatherRequestDto weatherRequestDto) {
         LocalDate date = weatherRequestDto.date();
-        long daysDifference = LocalDate.now().until(date).getDays();
+        var daysDifference = Math.abs(ChronoUnit.DAYS.between(LocalDate.now(), date));
         if (daysDifference > 16) {
-            throw new DatesOutOfRangeException("The requested date is too far in the future to provide accurate weather information.");
-        }
-
-        if (daysDifference < -90) {
-            throw new DatesOutOfRangeException("The requested data is too far in the past");
+            throw new DatesOutOfRangeException("The requested date is too far in the future or too far in the past to provide accurate weather information.");
         }
 
         List<Weather> response = new ArrayList<>();
