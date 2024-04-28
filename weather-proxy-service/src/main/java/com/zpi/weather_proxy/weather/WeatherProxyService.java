@@ -22,7 +22,11 @@ public class WeatherProxyService {
         LocalDate date = weatherRequestDto.date();
         var daysDifference = Math.abs(ChronoUnit.DAYS.between(LocalDate.now(), date));
         if (daysDifference > 16) {
-            throw new DatesOutOfRangeException("The requested date is too far in the future or too far in the past to provide accurate weather information.");
+            throw new DatesOutOfRangeException("The requested date is too far in the future to provide accurate weather information.");
+        }
+
+        if (daysDifference < -90) {
+            throw new DatesOutOfRangeException("The requested data is too far in the past");
         }
 
         List<Weather> response = new ArrayList<>();
