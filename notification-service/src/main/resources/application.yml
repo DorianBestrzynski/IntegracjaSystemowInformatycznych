@@ -3,6 +3,9 @@ spring.application.name: notification
 
 app.config-server: localhost
 app.database: localhost
+app.trip-group-service: localhost
+app.user-service: localhost
+app.email-from: 254556@student.pwr.edu.pl
 
 spring:
   rabbitmq:
@@ -38,6 +41,8 @@ spring:
 spring.config.activate.on-profile: docker
 spring.config.import: "configserver:"
 app.config-server: config-server
+app.trip-group-service: trip-group
+app.user-service: user
 app.database: postgres
 ---
 spring.config.activate.on-profile: test

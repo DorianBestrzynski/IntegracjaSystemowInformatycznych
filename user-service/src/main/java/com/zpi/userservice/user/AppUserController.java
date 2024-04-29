@@ -1,9 +1,7 @@
 package com.zpi.userservice.user;
 
 import com.zpi.userservice.dto.UserDto;
-import com.zpi.userservice.mapper.MapStructMapper;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +18,12 @@ public class AppUserController {
     @PostMapping("/users")
     public ResponseEntity<List<UserDto>> getUsersByIds(@RequestBody List<Long> usersIds) {
         var result = appUserService.getUsers(usersIds);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long userId) {
+        var result = appUserService.getUserById(userId);
         return ResponseEntity.ok(result);
     }
 

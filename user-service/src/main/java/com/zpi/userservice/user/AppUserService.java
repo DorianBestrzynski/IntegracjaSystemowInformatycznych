@@ -3,7 +3,6 @@ package com.zpi.userservice.user;
 import com.zpi.userservice.dto.UserDto;
 import com.zpi.userservice.mapper.MapStructMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -31,6 +30,15 @@ public class AppUserService {
                                               u.getFirstName(),
                                               u.getSurname()))
                         .toList();
+    }
+
+    public UserDto getUserById(Long userId) {
+        AppUser user = appUserRepository.getReferenceById(userId);
+        return new UserDto(user.getUserId(),
+                user.getPhoneNumber(),
+                user.getEmail(),
+                user.getFirstName(),
+                user.getSurname());
     }
 
     @Transactional
