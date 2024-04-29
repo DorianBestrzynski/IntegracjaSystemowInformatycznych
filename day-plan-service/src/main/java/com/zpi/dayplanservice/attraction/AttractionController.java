@@ -1,13 +1,18 @@
 package com.zpi.dayplanservice.attraction;
 
 import com.zpi.dayplanservice.dto.AttractionCandidateDto;
+import com.zpi.dayplanservice.dto.AttractionFullInfoDto;
 import com.zpi.dayplanservice.dto.AttractionPlanDto;
 import com.zpi.dayplanservice.dto.RankByType;
+import com.zpi.dayplanservice.weather.Weather;
+import com.zpi.dayplanservice.weather.WeatherRequest;
+import com.zpi.dayplanservice.weather.WeatherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -15,10 +20,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AttractionController {
     private final AttractionService attractionService;
+    private final WeatherService weatherService;
 
     @GetMapping()
-    public ResponseEntity<List<Attraction>> getAllAttractionsForDay(@RequestParam Long groupId, @RequestParam Long dayPlanId){
+    public ResponseEntity<List<AttractionFullInfoDto>> getAllAttractionsForDay(@RequestParam Long groupId, @RequestParam Long dayPlanId){
         var result = attractionService.getAllAttractionsForDay(groupId, dayPlanId);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/weather")
+    public ResponseEntity<Collection<Weather>> getWeatherForGeolocation(@RequestBody WeatherRequest weatherRequest){
+        var result = weatherService.getWeatherForAttraction(weatherRequest.getDate(), weatherRequest.getGeolocations()).values();
         return ResponseEntity.ok(result);
     }
 

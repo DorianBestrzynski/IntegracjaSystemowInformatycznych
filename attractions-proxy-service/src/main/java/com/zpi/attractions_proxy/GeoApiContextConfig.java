@@ -1,4 +1,4 @@
-package com.zpi.tripgroupservice.config;
+package com.zpi.attractions_proxy;
 
 import com.google.maps.GeoApiContext;
 import org.springframework.beans.factory.annotation.Value;
@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-@PropertySource("classpath:application-keys.yml")
 @Configuration
 public class GeoApiContextConfig {
 

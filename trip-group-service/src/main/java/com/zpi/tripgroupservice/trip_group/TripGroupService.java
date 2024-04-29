@@ -9,8 +9,8 @@ import com.zpi.tripgroupservice.dto.*;
 import com.zpi.tripgroupservice.exception.ApiPermissionException;
 import com.zpi.tripgroupservice.exception.ApiRequestException;
 import com.zpi.tripgroupservice.exception.ExceptionInfo;
-import com.zpi.tripgroupservice.google_api.Geolocation;
 import com.zpi.tripgroupservice.mapper.MapStructMapper;
+import com.zpi.tripgroupservice.proxy.CoordinatesProxy;
 import com.zpi.tripgroupservice.proxy.FinanceProxy;
 import com.zpi.tripgroupservice.security.CustomUsernamePasswordAuthenticationToken;
 import com.zpi.tripgroupservice.user_group.UserGroupService;
@@ -31,7 +31,7 @@ public class TripGroupService {
     private final TripGroupRepository tripGroupRepository;
     private final UserGroupService userGroupService;
     private final MapStructMapper mapstructMapper;
-    private final Geolocation geolocation;
+    private final CoordinatesProxy coordinatesProxy;
     private final FinanceProxy financeProxy;
     private static final String INNER_COMMUNICATION = "microserviceCommunication";
 
@@ -70,7 +70,7 @@ public class TripGroupService {
     public TripGroup createGroup(TripGroupDto groupDto) {
         CustomUsernamePasswordAuthenticationToken authentication = (CustomUsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         var tripGroup = new TripGroup(groupDto.name(),groupDto.currency(),groupDto.description(), groupDto.destinationLocation());
-            var coordinates = geolocation.findCoordinates(groupDto.destinationLocation());
+            var coordinates = coordinatesProxy.findCoordinates(groupDto.destinationLocation());
             tripGroup.setLatitude(coordinates[LATITUDE_INDEX]);
             tripGroup.setLongitude(coordinates[LONGITUDE_INDEX]);
             tripGroupRepository.save(tripGroup);
@@ -96,7 +96,7 @@ public class TripGroupService {
                 ExceptionInfo.GROUP_NOT_FOUND));
         mapstructMapper.updateFromTripGroupDtoToTripGroup(tripGroup,tripGroupDto);
         if(tripGroupDto.destinationLocation() != null) {
-            var coordinates = geolocation.findCoordinates(tripGroupDto.destinationLocation());
+            var coordinates = coordinatesProxy.findCoordinates(tripGroupDto.destinationLocation());
             tripGroup.setLatitude(coordinates[LATITUDE_INDEX]);
             tripGroup.setLongitude(coordinates[LONGITUDE_INDEX]);
         }

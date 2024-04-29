@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.zpi</groupId>
-    <artifactId>weather-proxy-service</artifactId>
+    <artifactId>weatherProxy-proxy-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>weather-proxy-service</name>
+    <name>weatherProxy-proxy-service</name>
     <description>Proxy to the external api</description>
     <properties>
         <java.version>18</java.version>

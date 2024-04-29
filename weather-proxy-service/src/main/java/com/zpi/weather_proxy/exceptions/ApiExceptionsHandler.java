@@ -1,5 +1,6 @@
 package com.zpi.weather_proxy.exceptions;
 
+import com.zpi.weather_proxy.weather.DatesOutOfRangeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -33,6 +34,11 @@ public class ApiExceptionsHandler {
     @ExceptionHandler(value = {NoSuchElementException.class})
     public ResponseEntity<Object> handleNoSuchElementException(NoSuchElementException e){
         return handleExceptions(e.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = {DatesOutOfRangeException.class})
+    public ResponseEntity<Object> handleNoSuchElementException(DatesOutOfRangeException e){
+        return handleExceptions(e.getMessage(), HttpStatus.I_AM_A_TEAPOT);
     }
 
     private ResponseEntity<Object> handleExceptions(String message, HttpStatus request){
