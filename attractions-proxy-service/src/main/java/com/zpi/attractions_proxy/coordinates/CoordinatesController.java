@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -13,7 +14,7 @@ public class CoordinatesController {
     private final GeolocationService geolocationService;
 
     @GetMapping()
-    public ResponseEntity<Double[]> getCoordinates(String startLocation) {
+    public ResponseEntity<Double[]> getCoordinates(@RequestParam String startLocation) {
         return ResponseEntity.ok(geolocationService.findCoordinates(startLocation));
     }
 }
