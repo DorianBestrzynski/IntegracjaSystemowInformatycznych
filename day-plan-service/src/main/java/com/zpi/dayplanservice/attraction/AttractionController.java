@@ -28,7 +28,7 @@ public class AttractionController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/weather")
+    @PostMapping("/weather")
     public ResponseEntity<Collection<Weather>> getWeatherForGeolocation(@RequestBody WeatherRequest weatherRequest){
         var result = weatherService.getWeatherForAttraction(weatherRequest.getDate(), weatherRequest.getGeolocations()).values();
         return ResponseEntity.ok(result);
