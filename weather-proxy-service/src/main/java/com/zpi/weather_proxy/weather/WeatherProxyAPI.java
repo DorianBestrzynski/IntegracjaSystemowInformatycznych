@@ -13,6 +13,10 @@ import java.util.List;
 public interface WeatherProxyAPI {
 
     @GetMapping("/forecast?daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max,rain_sum,wind_speed_10m_max&timezone=Europe%2FBerlin")
-    ResponseEntity<List<WeatherResponseDto>> getForecast(@RequestParam("latitude") List<Double> latitude, @RequestParam("longitude") List<Double> longitude,
-                                                         @RequestParam("start_date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, @RequestParam("end_date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate);
+    ResponseEntity<List<WeatherResponseDto>> getForecastList(@RequestParam("latitude") List<Double> latitude, @RequestParam("longitude") List<Double> longitude,
+                                                             @RequestParam("start_date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, @RequestParam("end_date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate);
+
+    @GetMapping("/forecast?daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max,rain_sum,wind_speed_10m_max&timezone=Europe%2FBerlin")
+    ResponseEntity<WeatherResponseDto> getForecast(@RequestParam("latitude") List<Double> latitude, @RequestParam("longitude") List<Double> longitude,
+                                                   @RequestParam("start_date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, @RequestParam("end_date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate);
 }

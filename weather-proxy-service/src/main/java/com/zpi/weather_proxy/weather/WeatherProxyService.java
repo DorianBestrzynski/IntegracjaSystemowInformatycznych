@@ -37,18 +37,27 @@ public class WeatherProxyService {
             latitudes.add(attraction.latitude());
         }
 
-        ResponseEntity<List<WeatherResponseDto>> responseEntity = weatherProxyAPI.getForecast(latitudes, longitudes, date, date);
-        if (responseEntity.getStatusCode().value() != 200 || responseEntity.getBody() == null) {
-            throw new IllegalStateException("Failed to retrieve data from OpenWeather API");
-        } else if (weatherRequestDto.geolocations().size() == responseEntity.getBody().size()) {
-            var apiResponse = responseEntity.getBody();
-            int i = 0;
-            for (WeatherRequestDto.AttractionInfo geolocation : weatherRequestDto.geolocations()) {
-                var weather = Weather.toWeather(geolocation.attractionId(), apiResponse.get(i).dailyWeatherData());
-                response.add(weather);
-                i++;
+        if (weatherRequestDto.geolocations().size() > 1) {
+            ResponseEntity<List<WeatherResponseDto>> responseEntity = weatherProxyAPI.getForecastList(latitudes, longitudes, date, date);
+            if (responseEntity.getStatusCode().value() != 200 || responseEntity.getBody() == null) {
+                throw new IllegalStateException("Failed to retrieve data from OpenWeather API");
+            } else if (weatherRequestDto.geolocations().size() == responseEntity.getBody().size()) {
+                var apiResponse = responseEntity.getBody();
+                int i = 0;
+                for (WeatherRequestDto.AttractionInfo geolocation : weatherRequestDto.geolocations()) {
+                    var weather = Weather.toWeather(geolocation.attractionId(), apiResponse.get(i).dailyWeatherData());
+                    response.add(weather);
+                    i++;
+                }
             }
-
+        } else if (weatherRequestDto.geolocations().size() == 1) {
+            ResponseEntity<WeatherResponseDto> responseEntity = weatherProxyAPI.getForecast(latitudes, longitudes, date, date);
+            if (responseEntity.getStatusCode().value() != 200 || responseEntity.getBody() == null) {
+                throw new IllegalStateException("Failed to retrieve data from OpenWeather API");
+            } else {
+                var weather = Weather.toWeather(weatherRequestDto.geolocations().get(0).attractionId(), responseEntity.getBody().dailyWeatherData());
+                response.add(weather);
+            }
         }
         return response;
     }
