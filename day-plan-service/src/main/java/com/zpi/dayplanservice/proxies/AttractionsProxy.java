@@ -3,14 +3,13 @@ package com.zpi.dayplanservice.proxies;
 import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.LatLng;
 //import com.zpi.dayplanservice.configuration.CustomFeignConfiguration;
+import com.zpi.dayplanservice.attraction.DistanceMatrixDTO;
 import com.zpi.dayplanservice.dto.AttractionCandidateDto;
 import com.zpi.dayplanservice.dto.GroupInformationDto;
 import com.zpi.dayplanservice.dto.RankByType;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public interface AttractionsProxy {
                                                 @RequestParam(name = "queryCategory", required = false) String queryCategory,
                                                 @RequestParam(name = "rankByType", required = false) RankByType rankByType);
 
-    @GetMapping("/distance-matrix")
-    DistanceMatrix getDistanceMatrix(List<LatLng> coordinates);
+    @PostMapping("/distance-matrix")
+    DistanceMatrixDTO getDistanceMatrix(@RequestBody List<LatLng> coordinates);
 
 }

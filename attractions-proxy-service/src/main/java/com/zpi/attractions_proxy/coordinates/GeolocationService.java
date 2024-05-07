@@ -37,6 +37,7 @@ public class GeolocationService {
             result[LATITUDE_INDEX] = latitude;
             result[LONGITUDE_INDEX] = longitude;
         } catch (ArrayIndexOutOfBoundsException | ApiException | InterruptedException | IOException e){
+            e.printStackTrace();
             throw new IllegalArgumentException("We cannot find your starting location. Please check or change starting point.");
         }
         return result;

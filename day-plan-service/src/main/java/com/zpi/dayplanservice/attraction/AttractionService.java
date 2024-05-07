@@ -158,7 +158,7 @@ public class AttractionService {
     }
 
     public RouteDto findBestAttractionsOrder(List<Attraction> attractions, int startingPointIndex) {
-        var distanceMatrix = attractionsProxy.getDistanceMatrix(getCoordinates(attractions));
+        var distanceMatrix = getDistanceMatrix(getCoordinates(attractions));
         var attractionList = new LinkedHashSet<Attraction>();
         var attractionDtoList = new ArrayList<AttractionPlanDto>();
 
@@ -197,6 +197,11 @@ public class AttractionService {
         }
 
         return new RouteDto(new ArrayList<>(attractionDtoList), routeDistance);
+    }
+
+    private DistanceMatrix getDistanceMatrix(List<LatLng> coordinates) {
+        var dto =  attractionsProxy.getDistanceMatrix(coordinates);
+        return new DistanceMatrix(dto.originAddresses(), dto.destinationAddresses(), dto.rows());
     }
 
     private List<LatLng> getCoordinates(List<Attraction> attractions) {

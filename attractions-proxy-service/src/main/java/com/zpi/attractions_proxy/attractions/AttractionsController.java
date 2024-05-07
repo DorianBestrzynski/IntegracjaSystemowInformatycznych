@@ -4,11 +4,9 @@ import com.google.maps.errors.ApiException;
 import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.LatLng;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,6 +14,7 @@ import java.util.List;
 @RestController()
 @RequestMapping("api/v1/attractions")
 @RequiredArgsConstructor
+@Slf4j
 public class AttractionsController {
     private final AttractionsService attractionsService;
 
@@ -34,8 +33,8 @@ public class AttractionsController {
         return ResponseEntity.ok(attractionCandidates);
     }
 
-    @GetMapping("/distance-matrix")
-    public ResponseEntity<DistanceMatrix> getDistanceMatrix(List<LatLng> coordinates) {
+    @PostMapping("/distance-matrix")
+    public ResponseEntity<DistanceMatrix> getDistanceMatrix(@RequestBody List<LatLng> coordinates)  {
         var distanceMatrix = attractionsService.getDistanceMatrix(coordinates);
         return ResponseEntity.ok(distanceMatrix);
     }
