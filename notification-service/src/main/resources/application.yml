@@ -5,7 +5,7 @@ app.config-server: localhost
 app.database: localhost
 app.trip-group-service: localhost
 app.user-service: localhost
-app.email-from: 254556@student.pwr.edu.pl
+app.email-from: 254491@student.pwr.edu.pl
 
 spring:
   rabbitmq:
